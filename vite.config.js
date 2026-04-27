@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
-  base: '/static/',
+  base: '/Vajraa-Intelligence/',
   plugins: [react()],
   server: {
     proxy: {
@@ -14,7 +14,7 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: 'backend/static',
+    outDir: 'dist',
     emptyOutDir: true,
   },
 });
