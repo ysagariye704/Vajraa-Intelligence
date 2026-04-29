@@ -17,7 +17,7 @@ function AdmNavbar() {
   useEffect(() => {
     const fetchSummary = async () => {
       try {
-        const res = await fetch('http://127.0.0.1:8000/api/admin/statistics/');
+        const res = await fetch('/api/admin/statistics/');
         const data = await res.json();
         if (data.success) {
           setSummary({

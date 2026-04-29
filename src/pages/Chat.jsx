@@ -16,7 +16,7 @@ function Chat() {
 
   const fetchMessages = async () => {
     try {
-      const res = await fetch(`http://127.0.0.1:8000/api/chat/messages/?user_id=${userId}`);
+      const res = await fetch(`/api/chat/messages/?user_id=${userId}`);
       const data = await res.json();
       if (data.success) {
         setMessages(data.messages);
@@ -30,7 +30,7 @@ function Chat() {
     if (!newMessage.trim()) return;
     setLoading(true);
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/chat/send/', {
+      const res = await fetch('/api/chat/send/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ user_id: userId, message: newMessage }),

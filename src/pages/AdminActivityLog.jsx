@@ -16,7 +16,7 @@ function AdminActivityLog() {
   const fetchLogs = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`http://127.0.0.1:8000/api/admin/activity-logs/?page=${page}&limit=${limit}`);
+      const res = await fetch(`/api/admin/activity-logs/?page=${page}&limit=${limit}`);
       const data = await res.json();
       if (data.success) {
         setLogs(data.logs);

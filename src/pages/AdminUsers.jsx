@@ -23,7 +23,7 @@ function AdminUsers() {
         search,
       });
 
-      const res = await fetch(`http://127.0.0.1:8000/api/admin/users-advanced/?${params}`);
+      const res = await fetch(`/api/admin/users-advanced/?${params}`);
       const data = await res.json();
       if (data.success) {
         setUsers(data.users);
@@ -38,7 +38,7 @@ function AdminUsers() {
   const handleDelete = async (id) => {
     if (!confirm('Permanently delete this user? This action cannot be undone.')) return;
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/admin/users/delete/', {
+      const res = await fetch('/api/admin/users/delete/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ user_id: id }),
