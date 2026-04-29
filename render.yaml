@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: vajraa-backend
+    runtime: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn backend_project.wsgi"
+
+  - type: web
+    name: vajraa-frontend
+    runtime: node
+    plan: free
+    buildCommand: "npm install && npm run build"
+    startCommand: "npm run preview"
