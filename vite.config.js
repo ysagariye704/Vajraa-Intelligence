@@ -5,6 +5,8 @@ export default defineConfig({
   base: '/Vajraa-Intelligence/',
   plugins: [react()],
   server: {
+    host: true,
+    allowedHosts: ['vajraa-frontend.onrender.com'],
     proxy: {
       '/api': {
         target: 'https://vajraa-backend.onrender.com',
@@ -16,5 +18,9 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     emptyOutDir: true,
+  },
+  preview: {
+    host: true,
+    allowedHosts: ['vajraa-frontend.onrender.com'],
   },
 });
