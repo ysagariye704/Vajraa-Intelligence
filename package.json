@@ -4,13 +4,8 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
-    "dev:frontend": "vite",
-    "dev:backend": "cd backend && python manage.py runserver 8000",
     "build": "vite build",
-    "start": "vite preview --host 0.0.0.0 --port $PORT",
-    "serve": "npm run build && cd backend && python manage.py runserver 8000",
-    "preview": "vite preview"
+    "start": "vite preview --host 0.0.0.0 --port $PORT"
   },
   "dependencies": {
     "lucide-react": "^1.8.0",
