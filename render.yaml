@@ -29,9 +29,10 @@ services:
       - key: VITE_API_URL
         value: https://vajraa-backend.onrender.com/api
 
-  # Database Service
-  - type: database
-    name: vajraa-db
-    databaseType: postgresql
+  # Database Service is managed in the top-level databases section.
+
+databases:
+  - name: vajraa-db
     plan: free
-    ipAllowList: []  # only accessible by other services
+    postgresMajorVersion: "15"
+    region: oregon
