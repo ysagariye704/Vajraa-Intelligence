@@ -2,7 +2,7 @@ services:
   # Backend API Service
   - type: web
     name: vajraa-backend
-    runtime: python3
+    env: python
     buildCommand: "cd backend && ./build.sh"
     startCommand: "cd backend && gunicorn backend_project.wsgi:application --bind 0.0.0.0:$PORT"
     envVars:
@@ -22,7 +22,7 @@ services:
   # Frontend Service
   - type: web
     name: vajraa-frontend
-    runtime: node
+    env: node
     buildCommand: npm install && npm run build
     startCommand: npm start
     envVars:
@@ -30,7 +30,8 @@ services:
         value: https://vajraa-backend.onrender.com/api
 
   # Database Service
-  - type: pserv
+  - type: database
     name: vajraa-db
-    runtime: postgresql
+    databaseType: postgresql
+    plan: free
     ipAllowList: []  # only accessible by other services

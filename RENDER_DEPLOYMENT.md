@@ -5,13 +5,13 @@
 ### Step 1: Connect to Render
 1. Go to [Render.com](https://render.com) and sign up/login
 2. Click "New" → "Blueprint"
-3. Connect your GitHub repository: `varaa-intelligence-main`
+3. Connect your GitHub repository: `Vajraa-Intelligence`
 
 ### Step 2: Configure Blueprint
 Render will automatically detect the `render.yaml` file and create:
-- **varaa-backend**: Django API service
-- **varaa-frontend**: React frontend service
-- **varaa-db**: PostgreSQL database
+- **vajraa-backend**: Django API service
+- **vajraa-frontend**: React frontend service
+- **vajraa-db**: PostgreSQL database
 
 ### Step 3: Deploy
 - Click "Apply" to create all services
