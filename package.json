@@ -8,7 +8,7 @@
     "dev:frontend": "vite",
     "dev:backend": "cd backend && python manage.py runserver 8000",
     "build": "vite build",
-    "start": "npm run build && npx serve dist -s -l 3000",
+    "start": "vite preview --host 0.0.0.0 --port $PORT",
     "serve": "npm run build && cd backend && python manage.py runserver 8000",
     "preview": "vite preview"
   },
