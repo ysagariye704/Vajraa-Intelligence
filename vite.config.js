@@ -6,5 +6,12 @@ export default defineConfig({
     react({
       jsxRuntime: "automatic"
     })
-  ]
+  ],
+  server: {
+    host: true
+  },
+  preview: {
+    host: true,
+    allowedHosts: ["vajraflow.net", "www.vajraflow.net"]
+  }
 });
