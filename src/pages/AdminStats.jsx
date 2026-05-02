@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { API_BASE_URL } from '../config/api';
 import { Link } from 'react-router-dom';
 import { Users, MessageSquare, TrendingUp, Calendar } from 'lucide-react';
 
@@ -12,7 +13,7 @@ function AdminStats() {
 
   const fetchStats = async () => {
     try {
-      const res = await fetch('/api/admin/statistics/');
+      const res = await fetch(`${API_BASE_URL}/api/admin/statistics/`);
       const data = await res.json();
       if (data.success) {
         setStats(data);

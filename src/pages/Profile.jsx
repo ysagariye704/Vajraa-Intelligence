@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../config/api';
 
 function Profile() {
   const [profile, setProfile] = useState(null);
@@ -25,7 +26,7 @@ function Profile() {
     const authUser = JSON.parse(saved);
     setUserId(authUser.user_id);
 
-    fetch(`/api/profile/?user_id=${authUser.user_id}`)
+    fetch(`${API_BASE_URL}/api/profile/?user_id=${authUser.user_id}`)
       .then((response) => response.json())
       .then((data) => {
         if (!data.success) {
@@ -92,7 +93,7 @@ function Profile() {
     data.append('profile_image', imageFile);
 
     try {
-      const response = await fetch('/api/profile/upload-image/', {
+      const response = await fetch(`${API_BASE_URL}/api/profile/upload-image/`, {
         method: 'POST',
         body: data,
       });
@@ -125,7 +126,7 @@ function Profile() {
     setMessage('');
 
     try {
-      const response = await fetch('/api/profile/update/', {
+      const response = await fetch(`${API_BASE_URL}/api/profile/update/`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

@@ -1,4 +1,5 @@
 ﻿import { useEffect, useState } from 'react';
+import { API_BASE_URL } from '../config/api';
 import { Send } from 'lucide-react';
 
 function AdminChats() {
@@ -14,7 +15,7 @@ function AdminChats() {
 
   const fetchChats = async () => {
     try {
-      const res = await fetch('/api/admin/chat/all/');
+      const res = await fetch(`${API_BASE_URL}/api/admin/chat/all/`);
       const data = await res.json();
       if (data.success) {
         setChats(data.chats);
@@ -26,7 +27,7 @@ function AdminChats() {
 
   const fetchMessages = async (userId) => {
     try {
-      const res = await fetch(`/api/chat/messages/?user_id=${userId}`);
+      const res = await fetch(`${API_BASE_URL}/api/chat/messages/?user_id=${userId}`);
       const data = await res.json();
       if (data.success) {
         setMessages(data.messages);
@@ -45,7 +46,7 @@ function AdminChats() {
     if (!newMessage.trim() || !selectedChat) return;
     setLoading(true);
     try {
-      const res = await fetch('/api/admin/chat/reply/', {
+      const res = await fetch(`${API_BASE_URL}/api/admin/chat/reply/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ user_id: selectedChat.user_id, message: newMessage }),

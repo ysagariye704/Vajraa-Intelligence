@@ -1,4 +1,5 @@
 ﻿import { useEffect, useState } from 'react';
+import { API_BASE_URL } from '../config/api';
 import { Send } from 'lucide-react';
 
 function Chat() {
@@ -16,7 +17,7 @@ function Chat() {
 
   const fetchMessages = async () => {
     try {
-      const res = await fetch(`/api/chat/messages/?user_id=${userId}`);
+      const res = await fetch(`${API_BASE_URL}/api/chat/messages/?user_id=${userId}`);
       const data = await res.json();
       if (data.success) {
         setMessages(data.messages);
@@ -30,7 +31,7 @@ function Chat() {
     if (!newMessage.trim()) return;
     setLoading(true);
     try {
-      const res = await fetch('/api/chat/send/', {
+      const res = await fetch(`${API_BASE_URL}/api/chat/send/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ user_id: userId, message: newMessage }),

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import { API_BASE_URL } from './config/api';
 import Navbar from './components/Navbar';
 import AlNavbar from './components/AlNavbar';
 import AdmNavbar from './components/AdmNavbar';
@@ -50,6 +51,13 @@ function App() {
     readAuthUser();
     window.addEventListener('authChange', readAuthUser);
     return () => window.removeEventListener('authChange', readAuthUser);
+  }, []);
+
+  useEffect(() => {
+    fetch(`${API_BASE_URL}/`)
+      .then((res) => res.json())
+      .then((data) => console.log('Backend connected:', data))
+      .catch((err) => console.error('Backend error:', err));
   }, []);
 
   return (

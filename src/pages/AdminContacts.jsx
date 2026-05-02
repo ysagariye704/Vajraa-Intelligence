@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { API_BASE_URL } from '../config/api';
 import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, Check, Trash2, Star, Download } from 'lucide-react';
 
@@ -25,7 +26,7 @@ function AdminContacts() {
       });
       if (filterRead) params.append('is_read', filterRead);
 
-      const res = await fetch(`/api/admin/contacts-advanced/?${params}`);
+      const res = await fetch(`${API_BASE_URL}/api/admin/contacts-advanced/?${params}`);
       const data = await res.json();
       if (data.success) {
         setContacts(data.messages);
@@ -40,7 +41,7 @@ function AdminContacts() {
   const handleDelete = async (id) => {
     if (!confirm('Delete this message permanently?')) return;
     try {
-      const res = await fetch('/api/admin/contacts/delete/', {
+      const res = await fetch(`${API_BASE_URL}/api/admin/contacts/delete/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message_id: id }),
@@ -57,7 +58,7 @@ function AdminContacts() {
 
   const handleToggleRead = async (id) => {
     try {
-      const res = await fetch('/api/admin/contacts/read/', {
+      const res = await fetch(`${API_BASE_URL}/api/admin/contacts/read/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message_id: id }),
@@ -73,7 +74,7 @@ function AdminContacts() {
 
   const handleToggleImportant = async (id) => {
     try {
-      const res = await fetch('/api/admin/contacts/important/', {
+      const res = await fetch(`${API_BASE_URL}/api/admin/contacts/important/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message_id: id }),

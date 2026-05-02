@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { API_BASE_URL } from '../config/api';
 import { Link } from 'react-router-dom';
 
 const initialLeads = [
@@ -18,7 +19,7 @@ function AdminDashboard() {
   useEffect(() => {
     const fetchAdminStats = async () => {
       try {
-        const response = await fetch('/api/admin/summary/');
+        const response = await fetch(`${API_BASE_URL}/api/admin/summary/`);
         const data = await response.json();
         if (response.ok && data.success) {
           setAdminStats((prev) => ({
@@ -28,7 +29,7 @@ function AdminDashboard() {
           }));
         }
 
-        const messagesResponse = await fetch('/api/admin/contacts/');
+        const messagesResponse = await fetch(`${API_BASE_URL}/api/admin/contacts/`);
         const messagesData = await messagesResponse.json();
         if (messagesResponse.ok && messagesData.success) {
           setAdminStats((prev) => ({ ...prev, total_messages: messagesData.messages.length }));

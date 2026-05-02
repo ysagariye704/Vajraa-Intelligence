@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { API_BASE_URL } from '../config/api';
 import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, Trash2, LogOut } from 'lucide-react';
 
@@ -23,7 +24,7 @@ function AdminUsers() {
         search,
       });
 
-      const res = await fetch(`/api/admin/users-advanced/?${params}`);
+      const res = await fetch(`${API_BASE_URL}/api/admin/users-advanced/?${params}`);
       const data = await res.json();
       if (data.success) {
         setUsers(data.users);
@@ -38,7 +39,7 @@ function AdminUsers() {
   const handleDelete = async (id) => {
     if (!confirm('Permanently delete this user? This action cannot be undone.')) return;
     try {
-      const res = await fetch('/api/admin/users/delete/', {
+      const res = await fetch(`${API_BASE_URL}/api/admin/users/delete/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ user_id: id }),

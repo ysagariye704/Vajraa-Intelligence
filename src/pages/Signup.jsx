@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../config/api';
 
 function Signup() {
   const [name, setName] = useState('');
@@ -23,7 +24,7 @@ function Signup() {
 
     setIsLoading(true);
     try {
-      const response = await fetch('/api/signup/', {
+      const response = await fetch(`${API_BASE_URL}/api/signup/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
