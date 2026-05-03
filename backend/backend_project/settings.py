@@ -104,3 +104,5 @@ CORS_ALLOWED_ORIGINS = [
     'https://varaa-intelligence-main.onrender.com',  # Add your Render frontend URL
     'https://varaa-backend.onrender.com',  # Add your Render backend URL
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
