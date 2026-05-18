@@ -226,19 +226,22 @@ def admin_contacts(request):
     ]
     return JsonResponse({'success': True, 'messages': messages_data})
 
-
+@csrf_exempt
 def contact(request):
-    if request.method == "POST":
-        try:
-            data = json.loads(request.body)
 
-            name = data.get("name")
-            email = data.get("email")
-            message = data.get("message")
+    if request.method != "POST":
+        return JsonResponse({"error": "POST required"}, status=405)
 
-            subject = "New Lead - Vajraa Intelligence"
+    try:
+        data = json.loads(request.body)
 
-            email_body = f"""
+        name = data.get("name")
+        email = data.get("email")
+        message = data.get("message")
+
+        subject = "New Lead - Vajraa Intelligence"
+
+        email_body = f"""
 Name: {name}
 
 Email: {email}
@@ -247,29 +250,29 @@ Message:
 {message}
 """
 
-            print("EMAIL TRYING")
-            print("EMAIL BODY:", email_body)
+        print("EMAIL TRYING")
+        print("EMAIL BODY:", email_body)
 
-            send_mail(
-                subject,
-                email_body,
-                settings.DEFAULT_FROM_EMAIL,
-                [settings.CONTACT_NOTIFICATION_EMAIL],
-                fail_silently=False,
-            )
+        send_mail(
+            subject,
+            email_body,
+            settings.DEFAULT_FROM_EMAIL,
+            [settings.CONTACT_NOTIFICATION_EMAIL],
+            fail_silently=False,
+        )
 
-            print("EMAIL SENT SUCCESSFULLY")
+        print("EMAIL SENT SUCCESSFULLY")
 
-            return JsonResponse({
-                "message": "Message sent successfully"
-            })
+        return JsonResponse({
+            "message": "Message sent successfully"
+        })
 
-        except Exception as e:
-            traceback.print_exc()
+    except Exception as e:
+        traceback.print_exc()
 
-            return JsonResponse({
-                "error": str(e)
-            }, status=500)
+        return JsonResponse({
+            "error": str(e)
+        }, status=500)
 
 
 @csrf_exempt
