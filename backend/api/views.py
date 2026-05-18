@@ -9,7 +9,7 @@ from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
-from rest_framework.response import Response
+import traceback
 
 from .models import ContactMessage, Profile, ActivityLog, ChatMessage
 
@@ -259,18 +259,22 @@ def contact(request):
     print('EMAIL BODY:', email_body)
 
     try:
-        send_mail(subject, email_body, from_email, recipient_list, fail_silently=False)
+        send_mail(
+            subject,
+            email_body,
+            settings.DEFAULT_FROM_EMAIL,
+            [settings.CONTACT_NOTIFICATION_EMAIL],
+            fail_silently=False,
+        )
         print('EMAIL SENT SUCCESSFULLY')
         logger.info('EMAIL SUCCESS: subject=%s to=%s', subject, recipient_list)
     except Exception as e:
         print('EMAIL ERROR:', str(e))
+        traceback.print_exc()
         logger.exception('Failed to send contact notification email')
-        return Response(
-            {"success": False, "error": str(e)},
-            status=500,
-        )
+        return JsonResponse({"error": str(e)}, status=500)
 
-    return JsonResponse({'success': True, 'message': 'Thank you! Your request is received.'})
+    return JsonResponse({"message": "Message sent successfully"})
 
 
 @csrf_exempt
