@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { API_BASE_URL } from '../config/api';
 import { Link } from 'react-router-dom';
+import { BackendHealthCheck } from '../components/BackendHealthCheck';
 
 const initialLeads = [
   { id: 1, name: 'Client A', company: 'Launch Labs', status: 'New', value: '$8.2K' },
@@ -90,6 +91,7 @@ function AdminDashboard() {
             Back to website
           </Link>
         </div>
+        <BackendHealthCheck />
       </div>
 
       <div className="grid gap-6 md:grid-cols-4">

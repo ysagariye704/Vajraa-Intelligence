@@ -54,8 +54,13 @@ function App() {
   }, []);
 
   useEffect(() => {
-    fetch(`${API_BASE_URL}/`)
-      .then((res) => res.json())
+    fetch(`${API_BASE_URL}/api/health/`)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`Backend responded with status ${res.status}`);
+        }
+        return res.json();
+      })
       .then((data) => console.log('Backend connected:', data))
       .catch((err) => console.error('Backend error:', err));
   }, []);

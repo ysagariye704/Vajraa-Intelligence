@@ -21,7 +21,7 @@ function Contact() {
 
     setIsLoading(true);
     try {
-      const response = await fetch(`${API_BASE_URL}/api/contact/`, {
+      const response = await fetch('https://vajraa-backend.onrender.com/api/contact/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

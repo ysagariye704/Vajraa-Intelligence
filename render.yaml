@@ -15,9 +15,9 @@ services:
           name: vajraa-db
           property: connectionString
       - key: ALLOWED_HOSTS
-        value: vajraa-backend.onrender.com,localhost,127.0.0.1
+        value: vajraa-backend.onrender.com,vajra-backend.onrender.com,localhost,127.0.0.1
       - key: PYTHONPATH
-        value: /opt/render/project/src/backend
+        value: /opt/render/project/backend
 
   # Frontend Service
   - type: web
