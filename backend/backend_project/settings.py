@@ -106,14 +106,15 @@ CONTACT_NOTIFICATION_EMAIL = os.getenv('CONTACT_NOTIFICATION_EMAIL', EMAIL_HOST_
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# CORS Configuration
+CORS_ALLOW_ALL_ORIGINS = True
+
 CORS_ALLOW_CREDENTIALS = True
+
 CSRF_TRUSTED_ORIGINS = [
     "https://vajraflow.net",
+    "https://www.vajraflow.net",
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    'https://vajraflow.net',
+ALLOWED_HOSTS = [
+    "*"
 ]
-
-CORS_ALLOW_ALL_ORIGINS = False
