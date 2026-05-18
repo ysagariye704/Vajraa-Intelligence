@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { API_BASE_URL } from '../config/api';
 
 function Contact() {
   const [name, setName] = useState('');
@@ -11,38 +10,45 @@ function Contact() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setError('');
-    setStatus('');
 
     if (!name || !email || !message) {
-      setError('Please complete all fields.');
+      alert('Please complete all fields.');
       return;
     }
 
-    setIsLoading(true);
+    console.log('Sending contact form...');
+
     try {
-      const response = await fetch('https://vajraa-backend.onrender.com/api/contact/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name, email, message }),
-      });
+      const response = await fetch(
+        "https://vajraa-backend.onrender.com/api/contact/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            message,
+          }),
+        }
+      );
+
       const data = await response.json();
 
-      if (!response.ok) {
-        setError(data.error || 'Could not submit your request.');
-        return;
-      }
+      console.log('Response:', data);
 
-      setStatus(data.message || 'Your request has been sent successfully.');
-      setName('');
-      setEmail('');
-      setMessage('');
-    } catch (error) {
-      setError('Unable to connect to the backend.');
-    } finally {
-      setIsLoading(false);
+      if (response.ok) {
+        alert('Message sent successfully');
+        setName('');
+        setEmail('');
+        setMessage('');
+      } else {
+        alert(data.error || 'Something went wrong');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Unable to connect to the backend.');
     }
   };
 
