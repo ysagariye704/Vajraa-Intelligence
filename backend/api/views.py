@@ -244,28 +244,29 @@ def contact(request):
 
     ContactMessage.objects.create(name=name, email=email, message=message)
 
-    subject = f'New Contact Lead: {name}'
-    body = (
-        f'New contact form submission received.\n\n'
+    subject = 'New Lead - Vajraa Intelligence'
+    email_body = (
+        f'New website lead received.\n\n'
         f'Name: {name}\n'
-        f'Email: {email}\n\n'
-        f'Message:\n{message}\n'
+        f'Email: {email}\n'
+        f'Message: {message}\n'
     )
-    from_email = settings.DEFAULT_FROM_EMAIL or settings.EMAIL_HOST_USER
-    recipient_list = [getattr(settings, 'CONTACT_NOTIFICATION_EMAIL', settings.EMAIL_HOST_USER)]
+    from_email = settings.DEFAULT_FROM_EMAIL
+    recipient_list = [settings.CONTACT_NOTIFICATION_EMAIL]
 
     print('EMAIL TRYING')
     logger.info('EMAIL TRYING: from=%s to=%s', from_email, recipient_list)
+    print('EMAIL BODY:', email_body)
 
     try:
-        send_mail(subject, body, from_email, recipient_list, fail_silently=False)
-        print('EMAIL SUCCESS')
+        send_mail(subject, email_body, from_email, recipient_list, fail_silently=False)
+        print('EMAIL SENT SUCCESSFULLY')
         logger.info('EMAIL SUCCESS: subject=%s to=%s', subject, recipient_list)
-    except Exception as exc:
-        print('EMAIL ERROR:', str(exc))
+    except Exception as e:
+        print('EMAIL ERROR:', str(e))
         logger.exception('Failed to send contact notification email')
         return Response(
-            {'success': False, 'error': str(exc)},
+            {"success": False, "error": str(e)},
             status=500,
         )
 
