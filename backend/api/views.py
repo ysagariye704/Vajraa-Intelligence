@@ -227,54 +227,49 @@ def admin_contacts(request):
     return JsonResponse({'success': True, 'messages': messages_data})
 
 
-@csrf_exempt
-@require_http_methods(['POST'])
 def contact(request):
-    try:
-        data = json.loads(request.body)
-    except json.JSONDecodeError:
-        return JsonResponse({'error': 'Invalid JSON payload.'}, status=400)
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
 
-    name = data.get('name', '').strip()
-    email = data.get('email', '').strip().lower()
-    message = data.get('message', '').strip()
+            name = data.get("name")
+            email = data.get("email")
+            message = data.get("message")
 
-    if not (name and email and message):
-        return JsonResponse({'error': 'Name, email, and message are required.'}, status=400)
+            subject = "New Lead - Vajraa Intelligence"
 
-    ContactMessage.objects.create(name=name, email=email, message=message)
+            email_body = f"""
+Name: {name}
 
-    subject = 'New Lead - Vajraa Intelligence'
-    email_body = (
-        f'New website lead received.\n\n'
-        f'Name: {name}\n'
-        f'Email: {email}\n'
-        f'Message: {message}\n'
-    )
-    from_email = settings.DEFAULT_FROM_EMAIL
-    recipient_list = [settings.CONTACT_NOTIFICATION_EMAIL]
+Email: {email}
 
-    print('EMAIL TRYING')
-    logger.info('EMAIL TRYING: from=%s to=%s', from_email, recipient_list)
-    print('EMAIL BODY:', email_body)
+Message:
+{message}
+"""
 
-    try:
-        send_mail(
-            subject,
-            email_body,
-            settings.DEFAULT_FROM_EMAIL,
-            [settings.CONTACT_NOTIFICATION_EMAIL],
-            fail_silently=False,
-        )
-        print('EMAIL SENT SUCCESSFULLY')
-        logger.info('EMAIL SUCCESS: subject=%s to=%s', subject, recipient_list)
-    except Exception as e:
-        print('EMAIL ERROR:', str(e))
-        traceback.print_exc()
-        logger.exception('Failed to send contact notification email')
-        return JsonResponse({"error": str(e)}, status=500)
+            print("EMAIL TRYING")
+            print("EMAIL BODY:", email_body)
 
-    return JsonResponse({"message": "Message sent successfully"})
+            send_mail(
+                subject,
+                email_body,
+                settings.DEFAULT_FROM_EMAIL,
+                [settings.CONTACT_NOTIFICATION_EMAIL],
+                fail_silently=False,
+            )
+
+            print("EMAIL SENT SUCCESSFULLY")
+
+            return JsonResponse({
+                "message": "Message sent successfully"
+            })
+
+        except Exception as e:
+            traceback.print_exc()
+
+            return JsonResponse({
+                "error": str(e)
+            }, status=500)
 
 
 @csrf_exempt
