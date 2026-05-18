@@ -1,13 +1,19 @@
 import json
+import logging
 
+from django.conf import settings
 from django.contrib.auth import authenticate, get_user_model, login as auth_login
 from django.contrib.auth.hashers import make_password
+from django.core.mail import send_mail
 from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
+from rest_framework.response import Response
 
 from .models import ContactMessage, Profile, ActivityLog, ChatMessage
+
+logger = logging.getLogger(__name__)
 
 User = get_user_model()
 
@@ -237,6 +243,32 @@ def contact(request):
         return JsonResponse({'error': 'Name, email, and message are required.'}, status=400)
 
     ContactMessage.objects.create(name=name, email=email, message=message)
+
+    subject = f'New Contact Lead: {name}'
+    body = (
+        f'New contact form submission received.\n\n'
+        f'Name: {name}\n'
+        f'Email: {email}\n\n'
+        f'Message:\n{message}\n'
+    )
+    from_email = settings.DEFAULT_FROM_EMAIL or settings.EMAIL_HOST_USER
+    recipient_list = [getattr(settings, 'CONTACT_NOTIFICATION_EMAIL', settings.EMAIL_HOST_USER)]
+
+    print('EMAIL TRYING')
+    logger.info('EMAIL TRYING: from=%s to=%s', from_email, recipient_list)
+
+    try:
+        send_mail(subject, body, from_email, recipient_list, fail_silently=False)
+        print('EMAIL SUCCESS')
+        logger.info('EMAIL SUCCESS: subject=%s to=%s', subject, recipient_list)
+    except Exception as exc:
+        print('EMAIL ERROR:', str(exc))
+        logger.exception('Failed to send contact notification email')
+        return Response(
+            {'success': False, 'error': str(exc)},
+            status=500,
+        )
+
     return JsonResponse({'success': True, 'message': 'Thank you! Your request is received.'})
 
 
