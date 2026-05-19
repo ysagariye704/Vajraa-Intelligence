@@ -4,7 +4,7 @@ import logging
 from django.conf import settings
 from django.contrib.auth import authenticate, get_user_model, login as auth_login
 from django.contrib.auth.hashers import make_password
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
@@ -240,13 +240,21 @@ def contact(request):
         email = data.get("email")
         message = data.get("message")
 
-        send_mail(
+        email_message = EmailMessage(
             subject=f"New Contact Form Message from {name}",
-            message=f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}",
+            body=f"""
+Name: {name}
+
+Email: {email}
+
+Message:
+{message}
+""",
             from_email=settings.DEFAULT_FROM_EMAIL,
-            recipient_list=[settings.CONTACT_NOTIFICATION_EMAIL],
-            fail_silently=False,
+            to=[settings.CONTACT_NOTIFICATION_EMAIL],
         )
+
+        email_message.send(fail_silently=False)
 
         return JsonResponse({"success": True, "message": "Message sent successfully"}, status=200)
     except Exception as e:
