@@ -229,50 +229,54 @@ def admin_contacts(request):
 @csrf_exempt
 def contact(request):
 
-    if request.method != "POST":
-        return JsonResponse({"error": "POST required"}, status=405)
+    if request.method == "POST":
 
-    try:
-        data = json.loads(request.body)
+        try:
+            data = json.loads(request.body)
 
-        name = data.get("name")
-        email = data.get("email")
-        message = data.get("message")
+            name = data.get("name")
+            email = data.get("email")
+            message = data.get("message")
 
-        subject = "New Lead - Vajraa Intelligence"
+            subject = f"New Contact Form Submission from {name}"
 
-        email_body = f"""
+            body = f"""
 Name: {name}
-
 Email: {email}
 
 Message:
 {message}
 """
 
-        print("EMAIL TRYING")
-        print("EMAIL BODY:", email_body)
+            print("EMAIL TRYING")
+            print(body)
 
-        send_mail(
-            subject,
-            email_body,
-            settings.DEFAULT_FROM_EMAIL,
-            [settings.CONTACT_NOTIFICATION_EMAIL],
-            fail_silently=False,
-        )
+            send_mail(
+                subject,
+                body,
+                settings.DEFAULT_FROM_EMAIL,
+                [settings.CONTACT_NOTIFICATION_EMAIL],
+                fail_silently=False,
+            )
 
-        print("EMAIL SENT SUCCESSFULLY")
+            return JsonResponse({
+                "success": True,
+                "message": "Email sent successfully"
+            })
 
-        return JsonResponse({
-            "message": "Message sent successfully"
-        })
+        except Exception as e:
 
-    except Exception as e:
-        traceback.print_exc()
+            print("EMAIL ERROR:", str(e))
 
-        return JsonResponse({
-            "error": str(e)
-        }, status=500)
+            return JsonResponse({
+                "success": False,
+                "error": str(e)
+            }, status=500)
+
+    return JsonResponse({
+        "success": False,
+        "message": "Invalid request"
+    }, status=400)
 
 
 @csrf_exempt
