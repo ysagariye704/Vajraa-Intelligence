@@ -14,9 +14,9 @@ DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
 
 # ALLOWED_HOSTS configuration for Render and frontend
 ALLOWED_HOSTS = [
-    "vajraa-backend-1.onrender.com",
-    "vajraflow.net",
-    "www.vajraflow.net",
+    "vajraa-backend.onrender.com",
+    "localhost",
+    "127.0.0.1",
 ]
 
 INSTALLED_APPS = [
