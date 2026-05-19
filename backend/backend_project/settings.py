@@ -14,8 +14,9 @@ DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
 
 # ALLOWED_HOSTS configuration for Render and frontend
 ALLOWED_HOSTS = [
-    "vajraa-backend.onrender.com",
+    "vajraa-backend-1.onrender.com",
     "vajraflow.net",
+    "www.vajraflow.net",
 ]
 
 INSTALLED_APPS = [
@@ -106,15 +107,16 @@ CONTACT_NOTIFICATION_EMAIL = os.getenv('CONTACT_NOTIFICATION_EMAIL', EMAIL_HOST_
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOW_ALL_ORIGINS = True
-
-CORS_ALLOW_CREDENTIALS = True
-
 CSRF_TRUSTED_ORIGINS = [
     "https://vajraflow.net",
     "https://www.vajraflow.net",
 ]
 
-ALLOWED_HOSTS = [
-    "*"
+CORS_ALLOWED_ORIGINS = [
+    "https://vajraflow.net",
+    "https://www.vajraflow.net",
 ]
+
+CORS_ALLOW_ALL_ORIGINS = False
+
+CORS_ALLOW_CREDENTIALS = True

@@ -20,7 +20,7 @@ function Contact() {
 
     try {
       const response = await fetch(
-        "https://vajraa-backend.onrender.com/api/contact/",
+        "https://vajraa-backend-1.onrender.com/api/contact/",
         {
           method: "POST",
           headers: {
