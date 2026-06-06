@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 <<<<<<< HEAD
 =======
 import { API_BASE_URL } from '../config/api';
@@ -97,3 +97,4 @@ function Chat() {
 }
 
 export default Chat;
+
