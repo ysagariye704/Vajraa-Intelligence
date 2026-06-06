@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+<<<<<<< HEAD
+=======
+import { API_BASE_URL } from '../config/api';
+>>>>>>> 00c4d67ba09f8d9cf56f09a7f75680c19e30b267
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -22,7 +26,11 @@ function Login() {
     setIsLoading(true);
 
     try {
+<<<<<<< HEAD
       const response = await fetch('/api/login/', {
+=======
+      const response = await fetch(`${API_BASE_URL}/api/login/`, {
+>>>>>>> 00c4d67ba09f8d9cf56f09a7f75680c19e30b267
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+<<<<<<< HEAD
+=======
+import { API_BASE_URL } from '../config/api';
+>>>>>>> 00c4d67ba09f8d9cf56f09a7f75680c19e30b267
 
 function Profile() {
   const [profile, setProfile] = useState(null);
@@ -25,7 +29,11 @@ function Profile() {
     const authUser = JSON.parse(saved);
     setUserId(authUser.user_id);
 
+<<<<<<< HEAD
     fetch(`/api/profile/?user_id=${authUser.user_id}`)
+=======
+    fetch(`${API_BASE_URL}/api/profile/?user_id=${authUser.user_id}`)
+>>>>>>> 00c4d67ba09f8d9cf56f09a7f75680c19e30b267
       .then((response) => response.json())
       .then((data) => {
         if (!data.success) {
@@ -92,7 +100,11 @@ function Profile() {
     data.append('profile_image', imageFile);
 
     try {
+<<<<<<< HEAD
       const response = await fetch('/api/profile/upload-image/', {
+=======
+      const response = await fetch(`${API_BASE_URL}/api/profile/upload-image/`, {
+>>>>>>> 00c4d67ba09f8d9cf56f09a7f75680c19e30b267
         method: 'POST',
         body: data,
       });
@@ -125,7 +137,11 @@ function Profile() {
     setMessage('');
 
     try {
+<<<<<<< HEAD
       const response = await fetch('/api/profile/update/', {
+=======
+      const response = await fetch(`${API_BASE_URL}/api/profile/update/`, {
+>>>>>>> 00c4d67ba09f8d9cf56f09a7f75680c19e30b267
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

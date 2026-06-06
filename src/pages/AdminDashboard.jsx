@@ -1,5 +1,11 @@
 import { useEffect, useState } from 'react';
+<<<<<<< HEAD
 import { Link } from 'react-router-dom';
+=======
+import { API_BASE_URL } from '../config/api';
+import { Link } from 'react-router-dom';
+import { BackendHealthCheck } from '../components/BackendHealthCheck';
+>>>>>>> 00c4d67ba09f8d9cf56f09a7f75680c19e30b267
 
 const initialLeads = [
   { id: 1, name: 'Client A', company: 'Launch Labs', status: 'New', value: '$8.2K' },
@@ -18,7 +24,11 @@ function AdminDashboard() {
   useEffect(() => {
     const fetchAdminStats = async () => {
       try {
+<<<<<<< HEAD
         const response = await fetch('/api/admin/summary/');
+=======
+        const response = await fetch(`${API_BASE_URL}/api/admin/summary/`);
+>>>>>>> 00c4d67ba09f8d9cf56f09a7f75680c19e30b267
         const data = await response.json();
         if (response.ok && data.success) {
           setAdminStats((prev) => ({
@@ -28,7 +38,11 @@ function AdminDashboard() {
           }));
         }
 
+<<<<<<< HEAD
         const messagesResponse = await fetch('/api/admin/contacts/');
+=======
+        const messagesResponse = await fetch(`${API_BASE_URL}/api/admin/contacts/`);
+>>>>>>> 00c4d67ba09f8d9cf56f09a7f75680c19e30b267
         const messagesData = await messagesResponse.json();
         if (messagesResponse.ok && messagesData.success) {
           setAdminStats((prev) => ({ ...prev, total_messages: messagesData.messages.length }));
@@ -89,6 +103,10 @@ function AdminDashboard() {
             Back to website
           </Link>
         </div>
+<<<<<<< HEAD
+=======
+        <BackendHealthCheck />
+>>>>>>> 00c4d67ba09f8d9cf56f09a7f75680c19e30b267
       </div>
 
       <div className="grid gap-6 md:grid-cols-4">

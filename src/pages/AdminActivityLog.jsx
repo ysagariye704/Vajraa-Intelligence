@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+<<<<<<< HEAD
+=======
+import { API_BASE_URL } from '../config/api';
+>>>>>>> 00c4d67ba09f8d9cf56f09a7f75680c19e30b267
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 function AdminActivityLog() {
@@ -16,7 +20,11 @@ function AdminActivityLog() {
   const fetchLogs = async () => {
     setLoading(true);
     try {
+<<<<<<< HEAD
       const res = await fetch(`http://127.0.0.1:8000/api/admin/activity-logs/?page=${page}&limit=${limit}`);
+=======
+      const res = await fetch(`${API_BASE_URL}/api/admin/activity-logs/?page=${page}&limit=${limit}`);
+>>>>>>> 00c4d67ba09f8d9cf56f09a7f75680c19e30b267
       const data = await res.json();
       if (data.success) {
         setLogs(data.logs);

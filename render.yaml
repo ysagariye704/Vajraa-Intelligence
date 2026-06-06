@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: vajraa-backend
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn backend_project.wsgi"
+    plan: free
+
+  - type: static
+    name: vajraa-frontend
+    buildCommand: "npm install && npm run build"
+    publishPath: "dist"

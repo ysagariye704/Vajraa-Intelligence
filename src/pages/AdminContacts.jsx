@@ -1,4 +1,8 @@
 import { useEffect, useState } from 'react';
+<<<<<<< HEAD
+=======
+import { API_BASE_URL } from '../config/api';
+>>>>>>> 00c4d67ba09f8d9cf56f09a7f75680c19e30b267
 import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, Check, Trash2, Star, Download } from 'lucide-react';
 
@@ -25,7 +29,11 @@ function AdminContacts() {
       });
       if (filterRead) params.append('is_read', filterRead);
 
+<<<<<<< HEAD
       const res = await fetch(`http://127.0.0.1:8000/api/admin/contacts-advanced/?${params}`);
+=======
+      const res = await fetch(`${API_BASE_URL}/api/admin/contacts-advanced/?${params}`);
+>>>>>>> 00c4d67ba09f8d9cf56f09a7f75680c19e30b267
       const data = await res.json();
       if (data.success) {
         setContacts(data.messages);
@@ -40,7 +48,11 @@ function AdminContacts() {
   const handleDelete = async (id) => {
     if (!confirm('Delete this message permanently?')) return;
     try {
+<<<<<<< HEAD
       const res = await fetch('http://127.0.0.1:8000/api/admin/contacts/delete/', {
+=======
+      const res = await fetch(`${API_BASE_URL}/api/admin/contacts/delete/`, {
+>>>>>>> 00c4d67ba09f8d9cf56f09a7f75680c19e30b267
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message_id: id }),
@@ -57,7 +69,11 @@ function AdminContacts() {
 
   const handleToggleRead = async (id) => {
     try {
+<<<<<<< HEAD
       const res = await fetch('http://127.0.0.1:8000/api/admin/contacts/read/', {
+=======
+      const res = await fetch(`${API_BASE_URL}/api/admin/contacts/read/`, {
+>>>>>>> 00c4d67ba09f8d9cf56f09a7f75680c19e30b267
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message_id: id }),
@@ -73,7 +89,11 @@ function AdminContacts() {
 
   const handleToggleImportant = async (id) => {
     try {
+<<<<<<< HEAD
       const res = await fetch('http://127.0.0.1:8000/api/admin/contacts/important/', {
+=======
+      const res = await fetch(`${API_BASE_URL}/api/admin/contacts/important/`, {
+>>>>>>> 00c4d67ba09f8d9cf56f09a7f75680c19e30b267
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message_id: id }),
