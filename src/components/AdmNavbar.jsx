@@ -1,9 +1,5 @@
 import { useEffect, useState } from 'react';
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
-<<<<<<< HEAD
-=======
-import { API_BASE_URL } from '../config/api';
->>>>>>> 00c4d67ba09f8d9cf56f09a7f75680c19e30b267
 import { ChevronRight, Users, MessageSquare, TrendingUp } from 'lucide-react';
 
 function AdmNavbar() {
@@ -21,11 +17,7 @@ function AdmNavbar() {
   useEffect(() => {
     const fetchSummary = async () => {
       try {
-<<<<<<< HEAD
         const res = await fetch('http://127.0.0.1:8000/api/admin/statistics/');
-=======
-        const res = await fetch(`${API_BASE_URL}/api/admin/statistics/`);
->>>>>>> 00c4d67ba09f8d9cf56f09a7f75680c19e30b267
         const data = await res.json();
         if (data.success) {
           setSummary({

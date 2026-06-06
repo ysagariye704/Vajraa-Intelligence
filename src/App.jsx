@@ -1,9 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-<<<<<<< HEAD
-=======
-import { API_BASE_URL } from './config/api';
->>>>>>> 00c4d67ba09f8d9cf56f09a7f75680c19e30b267
 import Navbar from './components/Navbar';
 import AlNavbar from './components/AlNavbar';
 import AdmNavbar from './components/AdmNavbar';
@@ -56,21 +52,6 @@ function App() {
     return () => window.removeEventListener('authChange', readAuthUser);
   }, []);
 
-<<<<<<< HEAD
-=======
-  useEffect(() => {
-    fetch(`${API_BASE_URL}/api/health/`)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(`Backend responded with status ${res.status}`);
-        }
-        return res.json();
-      })
-      .then((data) => console.log('Backend connected:', data))
-      .catch((err) => console.error('Backend error:', err));
-  }, []);
-
->>>>>>> 00c4d67ba09f8d9cf56f09a7f75680c19e30b267
   return (
     <div className="min-h-screen bg-gradient-to-b from-brand-900 via-slate-950 to-slate-950 text-slate-100">
       {user ? (user.role === 'admin' ? <AdmNavbar /> : <AlNavbar />) : <Navbar />}

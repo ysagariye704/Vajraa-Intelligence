@@ -1,8 +1,4 @@
 import { useEffect, useState } from 'react';
-<<<<<<< HEAD
-=======
-import { API_BASE_URL } from '../config/api';
->>>>>>> 00c4d67ba09f8d9cf56f09a7f75680c19e30b267
 import { Link } from 'react-router-dom';
 import { Users, MessageSquare, TrendingUp, Calendar } from 'lucide-react';
 
