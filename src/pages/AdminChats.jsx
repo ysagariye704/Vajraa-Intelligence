@@ -1,8 +1,4 @@
 import { useEffect, useState } from 'react';
-<<<<<<< HEAD
-=======
-import { API_BASE_URL } from '../config/api';
->>>>>>> 00c4d67ba09f8d9cf56f09a7f75680c19e30b267
 import { Send } from 'lucide-react';
 
 function AdminChats() {
@@ -18,11 +14,7 @@ function AdminChats() {
 
   const fetchChats = async () => {
     try {
-<<<<<<< HEAD
       const res = await fetch('http://127.0.0.1:8000/api/admin/chat/all/');
-=======
-      const res = await fetch(`${API_BASE_URL}/api/admin/chat/all/`);
->>>>>>> 00c4d67ba09f8d9cf56f09a7f75680c19e30b267
       const data = await res.json();
       if (data.success) {
         setChats(data.chats);
@@ -34,11 +26,7 @@ function AdminChats() {
 
   const fetchMessages = async (userId) => {
     try {
-<<<<<<< HEAD
       const res = await fetch(`http://127.0.0.1:8000/api/chat/messages/?user_id=${userId}`);
-=======
-      const res = await fetch(`${API_BASE_URL}/api/chat/messages/?user_id=${userId}`);
->>>>>>> 00c4d67ba09f8d9cf56f09a7f75680c19e30b267
       const data = await res.json();
       if (data.success) {
         setMessages(data.messages);
@@ -57,11 +45,7 @@ function AdminChats() {
     if (!newMessage.trim() || !selectedChat) return;
     setLoading(true);
     try {
-<<<<<<< HEAD
       const res = await fetch('http://127.0.0.1:8000/api/admin/chat/reply/', {
-=======
-      const res = await fetch(`${API_BASE_URL}/api/admin/chat/reply/`, {
->>>>>>> 00c4d67ba09f8d9cf56f09a7f75680c19e30b267
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ user_id: selectedChat.user_id, message: newMessage }),

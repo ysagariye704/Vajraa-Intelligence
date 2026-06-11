@@ -1,9 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-<<<<<<< HEAD
-=======
-import { BackendHealthCheck } from '../components/BackendHealthCheck';
->>>>>>> 00c4d67ba09f8d9cf56f09a7f75680c19e30b267
 
 function AfterLoginHome() {
   const [user, setUser] = useState(null);
@@ -55,11 +51,6 @@ function AfterLoginHome() {
           </div>
         </div>
 
-<<<<<<< HEAD
-=======
-        <BackendHealthCheck />
-
->>>>>>> 00c4d67ba09f8d9cf56f09a7f75680c19e30b267
         <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
           <Link
             to="/profile"
