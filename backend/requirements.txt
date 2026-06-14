@@ -1,3 +1,5 @@
 Django>=4.2,<5
 django-cors-headers>=3.13.0
 gunicorn
+dj-database-url
+psycopg2-binary

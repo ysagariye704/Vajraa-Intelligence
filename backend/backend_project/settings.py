@@ -1,5 +1,7 @@
 import os
 from pathlib import Path
+import dj_database_url
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -64,10 +66,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 'backend_project.wsgi.application'
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.parse(
+        os.environ.get("postgresql://vajraa_intelligence_user:ePsrNBdMC0ke3MLJWbvw3EmYaVLy606B@dpg-d8n4gm3tqb8s73coqsjg-a/vajraa_intelligence")
+    )
 }
 
 AUTH_PASSWORD_VALIDATORS = []
