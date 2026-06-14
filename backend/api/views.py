@@ -6,8 +6,9 @@ from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
-from django.core.mail import send_mail
 from django.conf import settings
+from django.core.mail import send_mail
+import json
 
 from .models import ContactMessage, Profile, ActivityLog, ChatMessage
 
@@ -238,22 +239,31 @@ def contact(request):
     if not (name and email and message):
         return JsonResponse({'error': 'Name, email, and message are required.'}, status=400)
 
+    # Save to DB (safe)
     ContactMessage.objects.create(name=name, email=email, message=message)
-    send_mail(
-        subject=f'New Contact Form Submission from {name}',
-        message=f'''
-    Name: {name}
-    Email: {email}
 
-    Message:
-    {message}
-    ''',
-        from_email=settings.EMAIL_HOST_USER,
-        recipient_list=[settings.EMAIL_HOST_USER],
-        fail_silently=False,
-    )
-    return JsonResponse({'success': True, 'message': 'Thank you! Your request is received.'})
+    # Email (SAFE: never crash API)
+    try:
+        send_mail(
+            subject=f'New Contact Form Submission from {name}',
+            message=f"""
+Name: {name}
+Email: {email}
 
+Message:
+{message}
+""",
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[settings.EMAIL_HOST_USER],
+            fail_silently=True,   # 🔥 IMPORTANT CHANGE
+        )
+    except Exception as e:
+        print("Email failed:", e)
+
+    return JsonResponse({
+        'success': True,
+        'message': 'Thank you! Your request is received.'
+    })
 
 @csrf_exempt
 @require_http_methods(['GET'])
