@@ -13,7 +13,7 @@ Use the **Backend Health Check** component:
 
 #### Build Configuration
 - [x] Vite build optimized for production
-- [x] API URL correctly set to `https://vajraa-backend-1.onrender.com/api`
+- [x] API URL correctly set to `https://vajraa-backend.onrender.com/api`
 - [x] No localhost URLs in production code
 - [x] Environment variables configured properly
 - [x] Backend health check component added
@@ -24,7 +24,7 @@ Use the **Backend Health Check** component:
 - `src/pages/AfterLoginHome.jsx` - Updated: Added health check
 - `src/pages/AdminDashboard.jsx` - Updated: Added health check
 
-### ✅ Backend Deployment (https://vajraa-backend-1.onrender.com)
+### ✅ Backend Deployment (https://vajraa-backend.onrender.com)
 
 #### URL Configuration
 - [x] API routes properly included in `backend_project/urls.py`
@@ -36,7 +36,7 @@ Use the **Backend Health Check** component:
 - [x] CORS_ALLOWED_ORIGINS includes:
   - `https://vajraflow.net`
   - `https://www.vajraflow.net`
-  - `https://vajraa-backend-1.onrender.com`
+  - `https://vajraa-backend.onrender.com`
   - Development URLs (localhost, 127.0.0.1)
 - [x] CORS_ALLOW_CREDENTIALS enabled
 - [x] Django middleware properly configured
@@ -59,7 +59,7 @@ Use the **Backend Health Check** component:
 ### Test 1: Browser Console Health Check
 ```javascript
 // Run this in browser console (F12)
-fetch('https://vajraa-backend-1.onrender.com/api/health/')
+fetch('https://vajraa-backend.onrender.com/api/health/')
   .then(r => r.json())
   .then(d => console.log('✅ Backend OK:', d))
   .catch(e => console.error('❌ Backend Error:', e.message))
@@ -84,26 +84,26 @@ fetch('https://vajraa-backend-1.onrender.com/api/health/')
 **Step 1: Verify Backend is Running**
 ```bash
 # Check backend service on Render
-curl https://vajraa-backend-1.onrender.com
+curl https://vajraa-backend.onrender.com
 # Should return: "Backend is running 🚀"
 ```
 
 **Step 2: Test Health Endpoint**
 ```bash
-curl https://vajraa-backend-1.onrender.com/api/health/
+curl https://vajraa-backend.onrender.com/api/health/
 # Should return: {"status":"ok","service":"Vajraa Intelligence backend"}
 ```
 
 **Step 3: Check CORS Headers**
 ```bash
 curl -i -H "Origin: https://vajraflow.net" \
-  https://vajraa-backend-1.onrender.com/api/health/
+  https://vajraa-backend.onrender.com/api/health/
 # Look for: Access-Control-Allow-Origin: https://vajraflow.net
 ```
 
 **Step 4: Verify Frontend API URL**
 - Check: `src/config/api.js`
-- Should be: `https://vajraa-backend-1.onrender.com`
+- Should be: `https://vajraa-backend.onrender.com`
 
 ### Issue: CORS Error in Browser
 
@@ -179,8 +179,8 @@ ls backend/staticfiles/
 | Service | URL | Status |
 |---------|-----|--------|
 | Frontend | https://vajraflow.net | Production |
-| Backend | https://vajraa-backend-1.onrender.com | Production |
-| Health Check | https://vajraa-backend-1.onrender.com/api/health/ | ✅ Active |
+| Backend | https://vajraa-backend.onrender.com | Production |
+| Health Check | https://vajraa-backend.onrender.com/api/health/ | ✅ Active |
 | Admin Dashboard | https://vajraflow.net/app-admin/dashboard | Production |
 
 ## Next Steps
