@@ -257,10 +257,10 @@ def contact(request):
     except Exception as e:
         logger.error(f"Email failed but ignored: {e}")
 
-        return JsonResponse({
-            'success': True,
-            'message': 'Thank you! Your request is received.'
-        })
+    return JsonResponse({
+        'success': True,
+        'message': 'Thank you! Your request is received.'
+    })
 
 @csrf_exempt
 @require_http_methods(['GET'])
