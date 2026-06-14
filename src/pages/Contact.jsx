@@ -56,7 +56,7 @@ function Contact() {
     <section className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr]">
       <div className="rounded-3xl border border-slate-800 bg-slate-950/80 p-10 shadow-glow">
         <p className="text-sm uppercase tracking-[0.24em] text-brand-300">Contact</p>
-        <h1 className="mt-4 text-4xl font-semibold text-white">Start a conversation with our amazing team.</h1>
+        <h1 className="mt-4 text-4xl font-semibold text-white">Start a conversation with our team.</h1>
         <p className="mt-4 text-slate-300">Fill in your details and we will get back to you with a product walkthrough and implementation plan.</p>
 
         <div className="mt-10 space-y-6">
