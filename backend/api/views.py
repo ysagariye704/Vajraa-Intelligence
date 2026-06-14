@@ -12,6 +12,10 @@ import json
 
 from .models import ContactMessage, Profile, ActivityLog, ChatMessage
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 User = get_user_model()
 
 
@@ -242,28 +246,21 @@ def contact(request):
     # Save to DB (safe)
     ContactMessage.objects.create(name=name, email=email, message=message)
 
-    # Email (SAFE: never crash API)
     try:
         send_mail(
             subject=f'New Contact Form Submission from {name}',
-            message=f"""
-Name: {name}
-Email: {email}
-
-Message:
-{message}
-""",
+            message=message,
             from_email=settings.EMAIL_HOST_USER,
             recipient_list=[settings.EMAIL_HOST_USER],
-            fail_silently=True,   # 🔥 IMPORTANT CHANGE
+            fail_silently=True,
         )
     except Exception as e:
-        print("Email failed:", e)
+        logger.error(f"Email failed but ignored: {e}")
 
-    return JsonResponse({
-        'success': True,
-        'message': 'Thank you! Your request is received.'
-    })
+        return JsonResponse({
+            'success': True,
+            'message': 'Thank you! Your request is received.'
+        })
 
 @csrf_exempt
 @require_http_methods(['GET'])
